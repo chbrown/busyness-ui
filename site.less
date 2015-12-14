@@ -1,0 +1,60 @@
+body {
+  font: 14px Helvetica, Arial, sans-serif;
+  margin: 0;
+}
+
+.location {
+  margin: 10px;
+  .name {
+    font-weight: bold;
+  }
+}
+
+.days {
+  display: flex;
+  // align-items: flex-end;
+  .day {
+    border-right: 1px solid #DDD;
+    .name {
+      position: absolute;
+      margin: 2px;
+      font-weight: bold;
+      font-size: 80%;
+    }
+    &:first-child {
+      border-left: 1px solid #DDD;
+    }
+  }
+}
+
+.columns {
+  display: flex;
+  align-items: flex-end;
+  .column {
+    margin-right: 1px;
+    width: 6px;
+    // label
+    font: 8px Arial;
+    text-align: center;
+  }
+}
+
+.bars {
+  // 75 is the highest bar in my dataset
+  min-height: 78px;
+  .bar {
+    border-bottom: 1px solid red;
+    background-color: blue;
+    // label
+    color: white;
+    // current time highlight
+    &.now {
+      background-color: orange;
+    }
+  }
+}
+.labels {
+  .label {
+    font-weight: bold;
+  }
+}

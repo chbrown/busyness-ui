@@ -1,0 +1,41 @@
+{
+  "name": "busyness-ui",
+  "description": "Google Popular Times UI",
+  "version": "0.0.0",
+  "keywords": [
+    "popular",
+    "times"
+  ],
+  "homepage": "https://github.com/chbrown/busyness-ui",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/chbrown/busyness-ui.git"
+  },
+  "author": "Christopher Brown <io@henrian.com> (http://henrian.com)",
+  "license": "MIT",
+  "private": true,
+  "dependencies": {
+    "react": "*",
+    "react-dom": "*"
+  },
+  "devDependencies": {
+    "babel-core": "^5.0.0",
+    "babel-loader": "^5.0.0",
+    "babel-plugin-react-transform": "*",
+    "css-loader": "*",
+    "declarations": "*",
+    "express": "*",
+    "less": "*",
+    "less-loader": "*",
+    "json-loader": "*",
+    "react-hot-loader": "*",
+    "react-transform-hmr": "*",
+    "style-loader": "*",
+    "ts-loader": "*",
+    "typescript": "*",
+    "webpack": "*",
+    "webpack-dev-middleware": "*",
+    "webpack-dev-server": "*",
+    "webpack-hot-middleware": "*"
+  }
+}
