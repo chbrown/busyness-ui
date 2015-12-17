@@ -52,6 +52,9 @@ class Day extends React.Component {
 }
 
 class Location extends React.Component {
+  shouldComponentUpdate(nextProps) {
+    return (this.props.name != nextProps.name) || (this.props.days != nextProps.days);
+  }
   render() {
     return (
       <div className="location">
@@ -91,7 +94,7 @@ class App extends React.Component {
     }
     return (
       <main>
-        <header style={{margin: '0 10px'}}>
+        <header>
           <h3>Showing {locations.length}/{allLocations.length} locations</h3>
           <div>
             <label>
@@ -101,7 +104,7 @@ class App extends React.Component {
             </label>
           </div>
         </header>
-        {locations.map(({name, days}, i) => <Location key={i} name={name} days={days} /> )}
+        {locations.map(({name, days}) => <Location key={name} name={name} days={days} /> )}
       </main>
     );
   }

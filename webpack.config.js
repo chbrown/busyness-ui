@@ -11,8 +11,8 @@ var entry = production ? [
 ];
 
 var plugins = production ? [
-  new webpack.optimize.UglifyJsPlugin(),
   new webpack.optimize.OccurenceOrderPlugin(),
+  new webpack.optimize.UglifyJsPlugin(),
 ] : [
   new webpack.HotModuleReplacementPlugin(),
   new webpack.NoErrorsPlugin(),
