@@ -82,10 +82,11 @@ class App extends React.Component {
     this.setState({excludeClosed});
   }
   render() {
-    let locations = allLocations;//.slice(0, 24);
+    let locations = allLocations;
     if (this.state.excludeClosed) {
       locations = locations.filter(location => {
-        return location.days[nowDayIndex][nowHourIndex] !== null;
+        // null is not greater than 0, so this works
+        return location.days[nowDayIndex][nowHourIndex] > 0;
       });
     }
     return (
