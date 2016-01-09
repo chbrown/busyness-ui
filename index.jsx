@@ -73,35 +73,74 @@ class Location extends React.Component {
   }
 }
 
+function range(min, max, step, epsilon = 1e-9) {
+  var xs = [];
+  for (var x = min; x < (max - epsilon); x += step) {
+    xs.push(x);
+  }
+  return xs;
+}
+const Slider = ({value, min = 0, max = 100, step = 1, onChange}) => {
+  const ticks = range(min, max + step, step);
+  return (
+    <div>
+      <input type="range" list="ticks" value={value} onChange={onChange} min={min} max={max} step={step} />
+      <datalist id="ticks">
+        {ticks.map(tick => <option key={tick}>{tick.toFixed(1)}</option>)}
+      </datalist>
+    </div>
+  );
+};
+Slider.propTypes = {
+  value: React.PropTypes.number.isRequired,
+  min: React.PropTypes.number.isRequired,
+  max: React.PropTypes.number.isRequired,
+  step: React.PropTypes.number.isRequired,
+  onChange: React.PropTypes.func,
+};
+
 class App extends React.Component {
   constructor() {
     super();
     let excludeClosed = localStorage.excludeClosed === 'true';
-    this.state = {excludeClosed};
+    let minimumScore = parseInt(localStorage.minimumScore || '0', 10);
+    this.state = {excludeClosed, minimumScore};
   }
   onExcludeClosedChange(ev) {
     let excludeClosed = ev.target.checked;
     localStorage.excludeClosed = excludeClosed;
     this.setState({excludeClosed});
   }
+  onMinimumScoreChange(ev) {
+    let minimumScore = parseFloat(ev.target.value);
+    localStorage.minimumScore = minimumScore;
+    this.setState({minimumScore});
+  }
   render() {
-    let locations = allLocations;
-    if (this.state.excludeClosed) {
-      locations = locations.filter(location => {
-        // null is not greater than 0, so this works
-        return location.days[nowDayIndex][nowHourIndex] > 0;
-      });
-    }
+    let locations = allLocations.filter(location => {
+      // null is not greater than 0, so this works
+      let open = location.days[nowDayIndex][nowHourIndex] > 0;
+      return (!this.state.excludeClosed || open) && (location.score >= this.state.minimumScore);
+    });
     return (
       <main>
         <header>
           <h3>Showing {locations.length}/{allLocations.length} locations</h3>
-          <div>
-            <label>
-              <input type="checkbox" checked={this.state.excludeClosed}
-                onChange={this.onExcludeClosedChange.bind(this)} />
-              <b>Exclude Closed</b> (locations with no clientele right now)
-            </label>
+          <div className="controls">
+            <div>
+              <label>
+                <input type="checkbox" checked={this.state.excludeClosed}
+                  onChange={this.onExcludeClosedChange.bind(this)} />
+                <b>Exclude Closed</b>
+              </label>
+              <div><small>(locations with no clientele right now)</small></div>
+            </div>
+            <div>
+              <label>
+                <b>Minimum Score: <output>{this.state.minimumScore}</output></b>
+                <Slider value={this.state.minimumScore} step={5} onChange={this.onMinimumScoreChange.bind(this)} />
+              </label>
+            </div>
           </div>
         </header>
         {locations.map(({name, days}) => <Location key={name} name={name} days={days} /> )}
