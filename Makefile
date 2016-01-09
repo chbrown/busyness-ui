@@ -2,9 +2,6 @@ BIN := node_modules/.bin
 
 all: build/bundle.js data/times.json
 
-data/times.json: data/times.njson
-	jq -s -c '.' $< >$@
-
 $(BIN)/webpack:
 	npm install
 
