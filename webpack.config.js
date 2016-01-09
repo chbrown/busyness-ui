@@ -29,21 +29,12 @@ module.exports = {
   resolve: {
     extensions: [
       '',
-      '.tsx',
-      '.ts',
       '.jsx',
       '.js',
-      '.json',
     ],
   },
   module: {
     loaders: [
-      {
-        test: /\.tsx?$/,
-        loaders: ['babel-loader', 'ts-loader'],
-        include: __dirname,
-        exclude: /node_modules/,
-      },
       {
         test: /\.jsx$/,
         loaders: ['babel-loader'],
