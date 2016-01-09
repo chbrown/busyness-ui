@@ -4,6 +4,10 @@ import ReactDOM from 'react-dom';
 import './site.less';
 import allLocations from './data/times.json';
 
+const verticalScale = 0.7;
+// 75 is the largest bar size in my dataset
+const barHeight = (78 * verticalScale) | 0;
+
 // const dayNames = ['M', 'Tu', 'W', 'Th', 'F', 'Sat', 'Sun'];
 const dayNames = ['Mon', 'Tues', 'Wed', 'Thurs', 'Fri', 'Sat', 'Sun'];
 const hourNames = [
@@ -30,11 +34,11 @@ class Day extends React.Component {
     return (
       <div className={`day ${(nowDayIndex == this.props.index) ? 'now' : ''}`}>
         <div className="name">{dayNames[this.props.index]}</div>
-        <div className="columns bars">
+        <div className="columns bars" style={{minHeight: `${barHeight}px`}}>
           {this.props.heights.map((height, i) => (
             <div key={i} title={height}
               className={`column bar ${(nowHourIndex == i) ? 'now' : ''}`}
-              style={{height: `${height || 0}px`}} />
+              style={{height: `${(height || 0) * verticalScale | 0}px`}} />
           ))}
         </div>
         <div className="columns labels">
