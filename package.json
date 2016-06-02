@@ -27,7 +27,6 @@
     "less": "*",
     "less-loader": "*",
     "json-loader": "*",
-    "react-hot-loader": "*",
     "react-transform-hmr": "*",
     "style-loader": "*",
     "webpack": "*",

@@ -1,31 +1,31 @@
 var path = require('path');
 var webpack = require('webpack');
 
-var production = process.env.NODE_ENV == 'production';
-
-var entry = production ? [
-  './index',
-] : [
-  'webpack-hot-middleware/client',
-  './index',
-];
-
-var plugins = production ? [
-  new webpack.optimize.OccurenceOrderPlugin(),
-  new webpack.optimize.UglifyJsPlugin(),
-] : [
-  new webpack.HotModuleReplacementPlugin(),
-  new webpack.NoErrorsPlugin(),
-];
+var env = process.env.NODE_ENV || 'development';
 
 module.exports = {
-  entry: entry,
+  entry: [
+    './index',
+    ...(env === 'production' ? [] : ['webpack-hot-middleware/client']),
+  ],
   output: {
     path: path.join(__dirname, 'build'),
     filename: 'bundle.js',
     publicPath: '/build/',
   },
-  plugins: plugins,
+  plugins: [
+    new webpack.DefinePlugin({
+      'process.env.NODE_ENV': JSON.stringify(env),
+    }),
+    new webpack.optimize.OccurenceOrderPlugin(),
+    new webpack.IgnorePlugin(/^\.\/locale$/, [/moment$/]),
+    ...(env === 'production' ? [
+      new webpack.optimize.UglifyJsPlugin(),
+    ] : [
+      new webpack.NoErrorsPlugin(),
+      new webpack.HotModuleReplacementPlugin(),
+    ]),
+  ],
   resolve: {
     extensions: [
       '',
