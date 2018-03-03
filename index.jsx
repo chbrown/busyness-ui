@@ -5,7 +5,9 @@ import {App} from './components';
 import allLocations from './data/times.json';
 import './site.less';
 
-const max = (a: number, b: number) => Math.max(a, b);
+function max(a, b) { // a: number, b: number
+  return Math.max(a, b);
+}
 
 // 75 is the largest bar size in my dataset, but find the maximum dynamically
 const maxHeight = allLocations.map(({days}) => {

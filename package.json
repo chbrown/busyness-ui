@@ -12,6 +12,7 @@
   "license": "MIT",
   "private": true,
   "dependencies": {
+    "prop-types": "^15.6.1",
     "react": "^0.14.6",
     "react-dom": "^0.14.6"
   },

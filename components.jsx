@@ -1,9 +1,10 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 
 /**
 Get the zero-based indices for a date.
 */
-function getDateIndices(date: Date) {
+function getDateIndices(date) { // date: Date
   return {
     year: date.getFullYear(),
     month: date.getMonth(),
@@ -48,11 +49,11 @@ export const Slider = ({value, min = 0, max = 100, step = 1, onChange = () => un
   );
 };
 Slider.propTypes = {
-  value: React.PropTypes.number.isRequired,
-  min: React.PropTypes.number,
-  max: React.PropTypes.number,
-  step: React.PropTypes.number,
-  onChange: React.PropTypes.func,
+  value: PropTypes.number.isRequired,
+  min: PropTypes.number,
+  max: PropTypes.number,
+  step: PropTypes.number,
+  onChange: PropTypes.func,
 };
 
 export const Day = ({index, heights, now}) => {
@@ -76,9 +77,9 @@ export const Day = ({index, heights, now}) => {
   );
 };
 Day.propTypes = {
-  index: React.PropTypes.number.isRequired,
-  heights: React.PropTypes.arrayOf(React.PropTypes.number).isRequired,
-  now: React.PropTypes.object.isRequired,
+  index: PropTypes.number.isRequired,
+  heights: PropTypes.arrayOf(PropTypes.number).isRequired,
+  now: PropTypes.object.isRequired,
 };
 
 export class Location extends React.Component {
@@ -98,12 +99,12 @@ export class Location extends React.Component {
       </div>
     );
   }
-  static propTypes = {
-    name: React.PropTypes.string.isRequired,
-    days: React.PropTypes.arrayOf(React.PropTypes.arrayOf(React.PropTypes.number)).isRequired,
-    now: React.PropTypes.object.isRequired,
-  };
 }
+Location.propTypes = {
+  name: PropTypes.string.isRequired,
+  days: PropTypes.arrayOf(PropTypes.arrayOf(PropTypes.number)).isRequired,
+  now: PropTypes.object.isRequired,
+};
 
 export class App extends React.Component {
   constructor() {
@@ -161,8 +162,8 @@ export class App extends React.Component {
       </main>
     );
   }
-  static propTypes = {
-    locations: React.PropTypes.array.isRequired,
-    now: React.PropTypes.object.isRequired,
-  };
 }
+App.propTypes = {
+  locations: PropTypes.array.isRequired,
+  now: PropTypes.object.isRequired,
+};
