@@ -1,0 +1,14 @@
+{
+  "compilerOptions": {
+    "jsx": "react",
+    "module": "commonjs",
+    "target": "ES6"
+  },
+  "files": [
+    "components/App.tsx",
+    "components/Day.tsx",
+    "components/Location.tsx",
+    "components/Slider.tsx",
+    "index.tsx"
+  ]
+}
